@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import './theme.scss';
+
+:root {
+  --max-content-width: 1200px;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background: #0f1011; /* fallback */
+  color: rgba(255,255,255,0.92);
+}
+
+/* Utility container */
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Minor helpers */
+.section-title {
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: rgba(255,255,255,0.92);
+}

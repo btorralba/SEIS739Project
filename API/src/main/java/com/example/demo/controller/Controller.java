@@ -1,16 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.*;
-import com.example.demo.model.request.UserRequest;
 import com.example.demo.model.response.Response;
 import com.example.demo.service.ApiService;
-import jdk.jfr.Frequency;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,5 +70,11 @@ public class Controller {
             orders = apiService.getOrdersBySku(skuAsNum);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    @PostMapping("/add/product")
+    public ResponseEntity<Response> addProduct(@RequestBody Product product) {
+        Response response = apiService.addProduct(product);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

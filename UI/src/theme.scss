@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+
+// Palettes (customize hex if desired)
+$night-primary: mat.define-palette(mat.$grey-palette, 900, 800, 700);
+$night-accent: mat.define-palette(mat.$amber-palette, 700, 500, 900);
+$night-warn: mat.define-palette(mat.$red-palette);
+
+// Build a dark theme
+$night-theme: mat.define-dark-theme((
+  color: (
+    primary: $night-primary,
+    accent: $night-accent,
+    warn: $night-warn,
+  ),
+  typography: mat.define-typography-config()
+));
+
+// Include all component themes
+@include mat.all-component-themes($night-theme);
+
+// App-specific tweaks for a tactical look
+.mat-toolbar {
+  background: linear-gradient(90deg, #0b0c0d, #111213);
+  color: #fff;
+}
+.mat-card {
+  background: #121314;
+  color: rgba(255,255,255,0.92);
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,0.04);
+}

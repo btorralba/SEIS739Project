@@ -1,0 +1,21 @@
+<div class="my-background-div">
+  <section class="hero" style="margin-bottom: 24px;">
+    <mat-card class="hero-card">
+      <div class="hero-content">
+        <h1>Night Ops Wear</h1>
+        <p>Purpose-built apparel for low-light ops & everyday tactical style.</p>
+      </div>
+    </mat-card>
+  </section>
+
+  <section>
+    <div class="section-title">New Arrivals</div>
+    <div class="product-grid">
+      <app-product-card
+        *ngFor="let p of products"
+        [product]="p">
+      </app-product-card>
+    </div>
+  </section>
+</div>
+    

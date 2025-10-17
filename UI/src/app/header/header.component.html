@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+  <button mat-icon-button (click)="sidenav.toggle()" class="mobile-only">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="logo" routerLink="/">Night Ops Wear</div>
+
+  <span class="spacer"></span>
+
+  <nav class="desktop-only">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/">Shop</a>
+    <a mat-button routerLink="/">Collections</a>
+    <a mat-button routerLink="/">About</a>
+  </nav>
+</mat-toolbar>
+
+<mat-sidenav-container class="snav-container">
+  <mat-sidenav #snav mode="over" class="side-nav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">Home</a>
+      <a mat-list-item routerLink="/">Shop</a>
+      <a mat-list-item routerLink="/">Collections</a>
+      <a mat-list-item routerLink="/">About</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- empty: content rendered in AppComponent router-outlet -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

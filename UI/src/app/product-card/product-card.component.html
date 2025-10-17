@@ -1,0 +1,17 @@
+<mat-card class="product-card">
+  <img
+    src="{{ 'assets/images/' + product.productImageId + '.png' }}"
+    style="height: 225.59px; width: 225.59px"
+  />
+
+  <mat-card-content>
+    <div class="meta">
+      <div class="name">{{ product.productName }}</div>
+      <div class="price">${{ product.price.toFixed(2) }}</div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-stroked-button (click)="addToCart()">Add to Cart</button>
+  </mat-card-actions>
+</mat-card>

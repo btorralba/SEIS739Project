@@ -1,9 +1,11 @@
+-- drop schema seis739finalschema CASCADE
+
 create schema if not exists seis739finalschema;
 
 create table if not exists seis739finalschema.product (
 	sku BIGINT PRIMARY KEY,
 	product_name VARCHAR(100) NOT NULL,
-	price MONEY NOT NULL,
+	price DOUBLE PRECISION NOT NULL,
 	img_id BIGINT NOT NULL
 );
 

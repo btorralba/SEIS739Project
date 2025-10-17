@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.*;
+import com.example.demo.model.response.Response;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,13 @@ public class ApiService {
 
     public User getUserByCreds(String user, String pass) {
         return userRepository.getUserByCreds(user, pass);
+    }
+
+    public Response addProduct(Product product) {
+        Response resp = new Response();
+        productRepository.save(product);
+        resp.setMessage("success");
+        return resp;
     }
 
 

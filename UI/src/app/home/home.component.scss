@@ -1,0 +1,36 @@
+.hero-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px;
+  gap: 20px;
+}
+
+.hero-content h1 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.hero-image {
+  width: 320px;
+  height: 160px;
+  background: linear-gradient(135deg, #0f1112, #151616);
+  border-radius: 6px;
+}
+
+/* grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.my-background-div {
+  background-image: url("/assets/images/hero.png");
+  background-size: cover; /* Ensures the image covers the entire element */
+  background-position: center; /* Centers the image within the element */
+  background-repeat: no-repeat; /* Prevents image repetition */
+  height: 100vh; /* Example: full viewport height */
+}
