@@ -17,11 +17,13 @@ export class ProductService {
 
   constructor(
     private readonly httpClient: HttpClient
-  ) {}
-
-
+  ) { }
 
   getProducts(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(`${this.API_BASE_URL}/products`);
+  }
+
+  getProductSearch(productName) {
+    return this.httpClient.get(`${this.API_BASE_URL}/product?productName=${productName}`);
   }
 }

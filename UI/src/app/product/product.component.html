@@ -1,0 +1,8 @@
+<h1>{{ product.productName }}</h1>
+<h2>${{ product.price }}</h2>
+<img
+  src="{{ '../assets/images/' + product.productImageId + '.png' }}"
+  style="height: 500px; width: 500px"
+/>
+<br />
+<button mat-stroked-button (click)="addToCart()">Add to Cart</button>

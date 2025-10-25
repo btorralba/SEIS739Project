@@ -10,6 +10,11 @@ import { ProductCardComponent } from './product-card/product-card.component';
 
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { ProductComponent } from './product/product.component';
+import { ProductModule } from './product/product.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,9 +26,12 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ProductModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

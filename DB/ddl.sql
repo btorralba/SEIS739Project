@@ -39,9 +39,9 @@ create table if not exists seis739finalschema.order (
 );
 
 create table if not exists seis739finalschema.user (
-	user_id VARCHAR(50) PRIMARY KEY,
-	user_pass VARCHAR(50) NOT NULL,
-	customer_sk BIGINT NOT NULL
+	customer_sk SERIAL PRIMARY KEY,
+	user_id VARCHAR(50) NOT NULL,
+	user_pass VARCHAR(50) NOT NULL
 );
 
 insert into seis739finalschema.product(sku, product_name, price, img_id) VALUES (123456, 'Guardian Of Shadows', 29.99, 1);
@@ -64,6 +64,6 @@ insert into seis739finalschema.order (sku, status, shipping_sk, customer_sk) VAL
 insert into seis739finalschema.order (sku, status, shipping_sk, customer_sk) VALUES (123456789, 'DELIVERED', 2, 2);
 insert into seis739finalschema.order (sku, status, shipping_sk, customer_sk) VALUES (123456, 'SHIPPED', 3, 3);
 
-insert into seis739finalschema.user VALUES ('joe', 'abc123', 1);
-insert into seis739finalschema.user VALUES ('bob', 'pass', 2);
-insert into seis739finalschema.user VALUES ('chuck', 'pass1', 3);
+insert into seis739finalschema.user (user_id, user_pass) VALUES ('joe', 'abc123');
+insert into seis739finalschema.user (user_id, user_pass) VALUES ('bob', 'pass');
+insert into seis739finalschema.user (user_id, user_pass) VALUES ('chuck', 'pass1');
