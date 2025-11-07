@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface User {
     userId: string;
     userPass: string;
+    isRegister: boolean;
 }
 
 export interface Customer {
@@ -31,6 +32,14 @@ export class AuthenticationService {
 
     getCustomerInfo(customerId) {
         return this.httpClient.get(`${this.API_BASE_URL}/customer?customerID=${customerId}`);
+    }
+
+    register(request) {
+        return this.httpClient.post(`${this.API_BASE_URL}/add/user`, request);
+    }
+
+    addCustomer(request) {
+        return this.httpClient.post(`${this.API_BASE_URL}/add/customer`, request);
     }
 
 }

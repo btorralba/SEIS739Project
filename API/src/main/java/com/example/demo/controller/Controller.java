@@ -46,7 +46,7 @@ public class Controller {
             @RequestParam(value = "sku", required = false) String sku,
             @RequestParam(value = "productName", required = false) String productName
     ) {
-        Product product = new Product();
+        Product product = new Product(); 
         if (sku != null && !sku.isBlank()) {
             Integer skuAsNum = Integer.parseInt(sku);
             product = apiService.getProductBySku(skuAsNum);
@@ -75,6 +75,18 @@ public class Controller {
     @PostMapping("/add/product")
     public ResponseEntity<Response> addProduct(@RequestBody Product product) {
         Response response = apiService.addProduct(product);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/add/user")
+    public ResponseEntity<Response> addProduct(@RequestBody User user) {
+        Response response = apiService.addUser(user);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/add/customer")
+    public ResponseEntity<Response> addProduct(@RequestBody Customer customer) {
+        Response response = apiService.addCustomer(customer);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

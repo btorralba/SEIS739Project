@@ -11,7 +11,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { ProductModule } from './product/product.module';
 import { RouterModule } from '@angular/router';
@@ -32,6 +32,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     MatIconModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

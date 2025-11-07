@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../material.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
         CommonModule,
         HttpClientModule,
         RouterModule,
+        MaterialModule,
     ]
 })
 export class ProductModule { }

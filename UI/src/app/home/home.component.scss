@@ -34,3 +34,9 @@
   background-repeat: no-repeat; /* Prevents image repetition */
   height: 100vh; /* Example: full viewport height */
 }
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

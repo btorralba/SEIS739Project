@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,13 +11,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "user", schema = "seis739finalschema")
 public class User {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    @Column(name = "user_id")
-    private String userID;
+    @Column(name = "customer_sk")
+    private Integer customerId;
 
     @Column(name = "user_pass")
     private String userPass;
 
-    @Column(name = "customer_sk")
-    private Integer customerId;
+    @Column(name = "user_id")
+    private String userID;
+
 }

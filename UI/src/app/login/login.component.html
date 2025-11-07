@@ -1,16 +1,58 @@
 <mat-dialog-content>
-  <h2>Please Login</h2>
-  <mat-form-field>
-    <mat-label>Username</mat-label>
-    <input matInput type="text" [(ngModel)]="userID" required />
-  </mat-form-field>
-  <br />
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput type="password" [(ngModel)]="userPass" required />
-  </mat-form-field>
+  <h2>Please Login or Sign-up</h2>
+  <div *ngIf="!isRegister">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" [(ngModel)]="userID" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="userPass" required />
+    </mat-form-field>
+  </div>
 
-  <mat-dialog-actions>
-    <button mat-button (click)="submit()">Submit</button>
-  </mat-dialog-actions>
+  <div *ngIf="isRegister">
+    <mat-form-field>
+      <mat-label>Enter Username</mat-label>
+      <input matInput type="text" [(ngModel)]="userID" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Enter Password</mat-label>
+      <input matInput type="password" [(ngModel)]="userPass" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Enter First Name</mat-label>
+      <input matInput type="text" [(ngModel)]="firstName" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Enter Last Name</mat-label>
+      <input matInput type="text" [(ngModel)]="lastName" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Enter Email Address</mat-label>
+      <input matInput type="text" [(ngModel)]="emailAddress" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Enter Phone Number</mat-label>
+      <input matInput type="text" [(ngModel)]="phoneNumber" />
+    </mat-form-field>
+  </div>
+
+  <div style="display: flex; justify-content: space-between">
+    <mat-dialog-actions>
+      <button mat-button (click)="submit()">Submit</button>
+    </mat-dialog-actions>
+
+    <mat-dialog-actions>
+      <button *ngIf="!isRegister" mat-button (click)="register()">
+        Sign-up
+      </button>
+    </mat-dialog-actions>
+  </div>
 </mat-dialog-content>

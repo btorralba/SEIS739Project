@@ -11,7 +11,9 @@
       (keyup.enter)="productSearch()"
       [(ngModel)]="productName"
     />
-    <button mat-button (click)="login()" *ngIf="!isLoggedIn">Login</button>
+    <button mat-button (click)="login()" *ngIf="!isLoggedIn">
+      <mat-icon>person</mat-icon>Login / Sign-up
+    </button>
     <div *ngIf="isLoggedIn">
       <h2>Welcome, {{ customer.firstName }}!</h2>
     </div>

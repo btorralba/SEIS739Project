@@ -64,5 +64,19 @@ public class ApiService {
         return resp;
     }
 
+    public Response addUser(User user) {
+        Response resp = new Response();
+        userRepository.save(user);
+        resp.setMessage(String.valueOf(user.getCustomerId()));
+        return resp;
+    }
+
+    public Response addCustomer(Customer customer) {
+        Response resp = new Response();
+        customerRepository.save(customer);
+        resp.setMessage(String.valueOf(customer.getCustomerId()));
+        return resp;
+    }
+
 
 }

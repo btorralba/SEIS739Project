@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    CommonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -34,14 +35,36 @@ export class LoginComponent {
   dialogRef = inject(MatDialogRef<LoginComponent>);
   data = {
     userID: '',
-    userPass: ''
+    userPass: '',
+    isRegister: false,
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    phoneNumber: ''
   };
   userID: string = "";
   userPass: string = "";
+  userPass2: string = "";
+  isRegister: boolean = false;
+  firstName: string = "";
+  lastName: string = "";
+  emailAddress: string = "";
+  phoneNumber: string = "";
 
   submit() {
     this.data.userID = this.userID;
     this.data.userPass = this.userPass;
+    this.data.isRegister = this.isRegister;
+    if (this.isRegister) {
+      this.data.firstName = this.firstName;
+      this.data.lastName = this.lastName;
+      this.data.emailAddress = this.emailAddress;
+      this.data.phoneNumber = this.phoneNumber ?? '';
+    }
     this.dialogRef.close(this.data);
+  }
+
+  register() {
+    this.isRegister = true;
   }
 }

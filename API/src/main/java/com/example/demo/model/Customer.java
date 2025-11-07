@@ -11,7 +11,6 @@ import lombok.Setter;
 @Entity
 @Table(name="customer", schema="seis739finalschema")
 public class Customer {
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     @Column(name = "customer_sk")
     private Integer customerId;

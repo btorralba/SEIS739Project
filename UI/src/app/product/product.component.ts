@@ -24,4 +24,8 @@ export class ProductComponent {
   addToCart() {
     this.snack.open(`${this.product.productName} added to cart`, 'Close', { duration: 2000 });
   }
+
+  navigateHome() {
+    this.router.navigateByUrl("/");
+  }
 }

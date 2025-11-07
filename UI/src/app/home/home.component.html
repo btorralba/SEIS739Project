@@ -11,10 +11,69 @@
   </section>
 
   <section>
-    <div class="section-title">New Arrivals</div>
-    <div class="product-grid">
+    <div class="section-title filter">
+      Our Products
+      <button mat-raised-button style="float: right" (click)="toggleFilter()">
+        Filter <mat-icon>filter_list</mat-icon>
+      </button>
+    </div>
+
+    <div *ngIf="isFilterOpen" style="background-color: gray">
+      <br />
+      <h2 style="margin-left: 10px">Select...</h2>
+      <div style="display: flex; justify-content: space-between">
+        <mat-form-field [formGroup]="filters" style="margin-left: 10px">
+          <mat-label>Color</mat-label>
+          <mat-select [formControl]="filters.controls['colors']" multiple>
+            @for (color of filterOptions.colors; track color) {
+            <mat-option [value]="color">{{ color }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field [formGroup]="filters" style="margin-left: 10px">
+          <mat-label>Price</mat-label>
+          <mat-select [formControl]="filters.controls['priceRanges']" multiple>
+            @for (priceRange of filterOptions.priceRanges; track priceRange) {
+            <mat-option [value]="priceRange">{{ priceRange }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field
+          [formGroup]="filters"
+          style="margin-left: 10px; margin-right: 10px"
+        >
+          <mat-label>Sizes Available</mat-label>
+          <mat-select [formControl]="filters.controls['sizes']" multiple>
+            @for (size of filterOptions.sizes; track size) {
+            <mat-option [value]="size">{{ size }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button
+        mat-raised-button
+        (click)="submitFilter()"
+        style="margin-left: 10px; margin-bottom: 10px"
+      >
+        Filter!
+      </button>
+    </div>
+
+    <div class="product-grid" *ngIf="!isFiltered">
       <app-product-card *ngFor="let p of products" [product]="p">
       </app-product-card>
     </div>
+    <div class="product-grid" *ngIf="isFiltered && filteredProducts.length > 0">
+      <app-product-card *ngFor="let p of filteredProducts" [product]="p">
+      </app-product-card>
+    </div>
+    <div *ngIf="isFiltered && filteredProducts.length == 0">
+      <h2>No products available for those filters...</h2>
+    </div>
+    <br />
+    <button *ngIf="isFiltered" mat-raised-button (click)="resetFilters()">
+      Reset Filters
+    </button>
   </section>
 </div>

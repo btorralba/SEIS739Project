@@ -1,8 +1,10 @@
 <mat-card class="product-card">
-  <img
-    src="{{ 'assets/images/' + product.productImageId + '.png' }}"
-    style="height: 225.59px; width: 225.59px"
-  />
+  <a (click)="handleProductClick()">
+    <img
+      src="{{ 'assets/images/' + product.productImageId + '.png' }}"
+      style="height: 225.59px; width: 225.59px"
+    />
+  </a>
 
   <mat-card-content>
     <div class="meta">
