@@ -1,0 +1,224 @@
+<h1 *ngIf="!isLoggedIn">Please login to checkout!</h1>
+<h1 *ngIf="isLoggedIn && cart.length == 0">No Items!</h1>
+<div *ngIf="isLoggedIn && cart.length > 0">
+  <mat-stepper #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Review Your Cart</ng-template>
+      @for (item of cart; track item; let idx = $index) {
+      <ul style="display: flex; justify-content: space-between">
+        <li>
+          {{ item.quantity }}X {{ item.name }} - {{ item.size }} ({{
+            item.color
+          }})
+        </li>
+        <img
+          src="{{ '../assets/images/' + item.productImageId + '.png' }}"
+          style="height: 150px; width: 150px"
+        />
+        <button mat-button mat-raised-button (click)="removeItem(idx)">
+          Remove Item
+        </button>
+      </ul>
+      }
+      <hr />
+      <h2>
+        <b>SUBTOTAL: ${{ cartTotal }}</b>
+      </h2>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Shipping Information</ng-template>
+      <form [formGroup]="shippingInfo">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          "
+        >
+          <mat-form-field style="width: 45%">
+            <input
+              matInput
+              placeholder="First Name"
+              [formControl]="shippingInfo.controls['firstName']"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 45%">
+            <input
+              matInput
+              placeholder="Last Name"
+              [formControl]="shippingInfo.controls['lastName']"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <hr />
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          "
+        >
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="123 Main Street"
+              [formControl]="shippingInfo.controls['addressLine1']"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="Unit #"
+              [formControl]="shippingInfo.controls['addressLine2']"
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="Attn: "
+              [formControl]="shippingInfo.controls['addressLine3']"
+            />
+          </mat-form-field>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          "
+        >
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="City"
+              [formControl]="shippingInfo.controls['city']"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="State"
+              [formControl]="shippingInfo.controls['state']"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="Zipcode"
+              [formControl]="shippingInfo.controls['zipCode']"
+              required
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Payment Information</ng-template>
+      <form [formGroup]="paymentInfo">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          "
+        >
+          <mat-form-field style="width: 45%">
+            <input
+              matInput
+              placeholder="First Name"
+              [formControl]="paymentInfo.controls['firstName']"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 45%">
+            <input
+              matInput
+              placeholder="Last Name"
+              [formControl]="paymentInfo.controls['lastName']"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <hr />
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          "
+        >
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="Credit Card Number"
+              [formControl]="paymentInfo.controls['creditCardNumber']"
+              maxlength="16"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="Expiration (MMYY)"
+              [formControl]="paymentInfo.controls['cardExpiration']"
+              maxlength="4"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field style="width: 30%">
+            <input
+              matInput
+              placeholder="CVV"
+              [formControl]="paymentInfo.controls['cardCVV']"
+              type="password"
+              maxlength="3"
+              required
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirmation</ng-template>
+      <h1>Your Order:</h1>
+      <div style="display: flex; justify-content: space-between">
+        <div>
+          @for (item of cart; track item; let idx = $index) {
+          <ul style="display: flex; justify-content: space-between">
+            <li style="font-size: 20px">
+              {{ item.quantity }}X {{ item.name }} - {{ item.size }}
+            </li>
+          </ul>
+          }
+        </div>
+        <div>
+          <h3>Sub-total: ${{ cartTotal }}</h3>
+          <h3>Shipping: ${{ shipping }}</h3>
+          <h3>Taxes: ${{ taxes | number : "1.2-2" }}</h3>
+          <h2>Total: ${{ finalTotal | number : "1.2-2" }}</h2>
+        </div>
+      </div>
+      <button
+        mat-button
+        mat-raised-button
+        *ngIf="!isOrderSubmitted"
+        (click)="submit()"
+      >
+        Submit Order!
+      </button>
+      <span *ngIf="isOrderSubmitted">
+        Your order {{ orderNumber }} has been submitted... please check your
+        email for updates!
+        <br />
+        <button mat-stroked-button (click)="navigateHome()">
+          <mat-icon>home</mat-icon>Return to Home
+        </button>
+      </span>
+    </mat-step>
+  </mat-stepper>
+</div>

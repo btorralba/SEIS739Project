@@ -1,0 +1,189 @@
+<div *ngIf="!isValid">
+  <mat-form-field>
+    <input matInput placeholder="Username" [(ngModel)]="username" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Password"
+      type="password"
+      [(ngModel)]="password"
+    />
+  </mat-form-field>
+  <br />
+
+  <button mat-button mat-raised-button (click)="validateCreds()">Submit</button>
+</div>
+
+<div *ngIf="isValid">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="productTableOpen.set(true)"
+      (closed)="productTableOpen.set(false)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Products</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="products">
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let product">{{ product.productName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="size">
+          <th mat-header-cell *matHeaderCellDef>Size</th>
+          <td mat-cell *matCellDef="let product">{{ product.size }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef>Color</th>
+          <td mat-cell *matCellDef="let product">{{ product.color }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sku">
+          <th mat-header-cell *matHeaderCellDef>SKU</th>
+          <td mat-cell *matCellDef="let product">{{ product.sku }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Price</th>
+          <td mat-cell *matCellDef="let product">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="price"
+                [value]="product.price"
+                [(ngModel)]="product.price"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>Quantity</th>
+          <td mat-cell *matCellDef="let product">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="qty"
+                [value]="product.quantity"
+                [(ngModel)]="product.quantity"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="productsDisplayedColumns; sticky: true"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: productsDisplayedColumns"
+        ></tr>
+      </table>
+    </mat-expansion-panel>
+    <br />
+
+    <mat-expansion-panel
+      (opened)="customerTableOpen.set(true)"
+      (closed)="customerTableOpen.set(false)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Customers</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="customers">
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let customer">{{ customer.firstName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let customer">{{ customer.lastName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="emailAddress">
+          <th mat-header-cell *matHeaderCellDef>Email Address</th>
+          <td mat-cell *matCellDef="let customer">
+            {{ customer.emailAddress }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="customerDisplayedColumns; sticky: true"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: customerDisplayedColumns"
+        ></tr>
+      </table>
+    </mat-expansion-panel>
+    <br />
+
+    <mat-expansion-panel
+      (opened)="orderTableOpen.set(true)"
+      (closed)="orderTableOpen.set(false)"
+      hideToggle
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Orders</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="orders">
+        <ng-container matColumnDef="orderSk">
+          <th mat-header-cell *matHeaderCellDef>Order ID</th>
+          <td mat-cell *matCellDef="let order">{{ order.orderSk }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="sku">
+          <th mat-header-cell *matHeaderCellDef>SKU</th>
+          <td mat-cell *matCellDef="let order">{{ order.sku }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="orderNumber">
+          <th mat-header-cell *matHeaderCellDef>Tracking Number</th>
+          <td mat-cell *matCellDef="let order">{{ order.orderNumber }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Order Status</th>
+          <td mat-cell *matCellDef="let order">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Status"
+                [value]="order.status"
+                [(ngModel)]="order.status"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="customerName">
+          <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+          <td mat-cell *matCellDef="let order">{{ order.customerName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="shippingAddress">
+          <th mat-header-cell *matHeaderCellDef>Shipping Address</th>
+          <td mat-cell *matCellDef="let order">{{ order.shippingAddress }}</td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="orderDisplayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns"></tr>
+      </table>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <br />
+  <button mat-button mat-raised-button (click)="submitChanges()">
+    Submit Changes
+  </button>
+</div>

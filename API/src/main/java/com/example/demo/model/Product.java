@@ -23,4 +23,13 @@ public class Product {
 
     @Column(name = "img_id")
     private Integer productImageId;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "size")
+    private String size;
+
+    @Column(name = "quantity")
+    private Integer quantity;
 }

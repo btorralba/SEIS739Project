@@ -7,6 +7,9 @@ export interface Product {
   productName: string;
   price: number;
   productImageId: number;
+  size: string;
+  color: string;
+  quantity: number;
 }
 
 @Injectable({
@@ -14,6 +17,7 @@ export interface Product {
 })
 export class ProductService {
   API_BASE_URL = 'http://localhost:8080/api';
+  products = [];
 
   constructor(
     private readonly httpClient: HttpClient
@@ -25,5 +29,25 @@ export class ProductService {
 
   getProductSearch(productName) {
     return this.httpClient.get(`${this.API_BASE_URL}/product?productName=${productName}`);
+  }
+
+  getSKU(name, color, size) {
+    return this.httpClient.get(`${this.API_BASE_URL}/product/sku?name=${name}&color=${color}&size=${size}`);
+  }
+
+  addItemsToCart(product) {
+    this.products.push(product);
+  }
+
+  getCart() {
+    return this.products;
+  }
+
+  setCart(cart) {
+    this.products = cart;
+  }
+
+  updateProduct(request) {
+    return this.httpClient.post(`${this.API_BASE_URL}/update/product`, request);
   }
 }

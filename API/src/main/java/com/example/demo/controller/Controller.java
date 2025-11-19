@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,18 +55,25 @@ public class Controller {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping("/orders")
+    @GetMapping("/ordersByParam")
     public ResponseEntity<List<Order>> getOrders(
             @RequestParam(value = "customerId", required = false) String customerId,
-            @RequestParam(value = "sku", required = false) String sku
+            @RequestParam(value = "sku", required = false) String sku,
+            @RequestParam(value = "status", required = false) String status
     ) {
         List<Order> orders = new ArrayList<Order>();
         if (customerId != null && !customerId.isBlank()) {
             Integer customerIdAsNum = Integer.parseInt(customerId);
             orders = apiService.getOrdersByCustomerId(customerIdAsNum);
-        } else if (!sku.isBlank()) {
+        } else if (sku != null && !sku.isBlank()) {
             Integer skuAsNum = Integer.parseInt(sku);
             orders = apiService.getOrdersBySku(skuAsNum);
+        } else if (!status.isBlank()) {
+            if (status.equals("*")) {
+                orders = apiService.getAllOrders();
+            } else {
+                orders = apiService.getOrdersByStatus(status);
+            }
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
@@ -88,5 +94,69 @@ public class Controller {
     public ResponseEntity<Response> addProduct(@RequestBody Customer customer) {
         Response response = apiService.addCustomer(customer);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/product/sku")
+    public ResponseEntity<Response> getSKU(
+            @RequestParam String name,
+            @RequestParam String size,
+            @RequestParam String color
+    ) {
+        Response response = apiService.getSkuByProduct(name, size, color);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/add/payment")
+    public ResponseEntity<Response> addPayment(
+            @RequestBody Payment request
+    ) {
+        Response response = apiService.addPayment(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/add/shipping")
+    public ResponseEntity<Response> addShipping(
+            @RequestBody Shipping request
+    ) {
+        Response response = apiService.addShipping(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/add/order")
+    public ResponseEntity<Response> addOrder(
+            @RequestBody Order request
+    ) {
+        Response response = apiService.addOrder(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/customers")
+    public ResponseEntity<List<Customer>> getCustomers() {
+        List<Customer> customerList = apiService.getAllCustomer();
+        return new ResponseEntity<>(customerList, HttpStatus.OK);
+    }
+
+    @GetMapping("/shippingAddressByCustomerId")
+    public ResponseEntity<Shipping> getShippingAddressByCustomerId(
+            @RequestParam (value = "customerID") Integer customerID
+    ) {
+        Shipping resp = apiService.getShippingAddressesByCustomerId(customerID).get(0);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
+    @PostMapping("/update/product")
+    public ResponseEntity<Response> updateProduct(
+            @RequestBody Product product
+    ) {
+        Response resp = apiService.updateProduct(product);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
+
+    @PostMapping("/update/order")
+    public ResponseEntity<Response> updateOrder(
+            @RequestBody Order order
+    ) {
+        Response resp = apiService.updateOrder(order);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 }

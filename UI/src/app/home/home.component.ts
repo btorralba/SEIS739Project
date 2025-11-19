@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products: Product[] = [];
+  products: any[] = [];
   isFilterOpen: boolean = false;
   filterOptions = {
     colors: ['Black', 'Tan'],
@@ -27,7 +27,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(resp => {
-      this.products = resp;
+      const uniqueProductsMap = new Map<string, any>();
+
+      resp.forEach(product => {
+        uniqueProductsMap.set(product.productName, product);
+      });
+
+      this.products = Array.from(uniqueProductsMap.values());
     });
   }
 

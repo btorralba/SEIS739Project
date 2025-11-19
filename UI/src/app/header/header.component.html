@@ -11,6 +11,9 @@
       (keyup.enter)="productSearch()"
       [(ngModel)]="productName"
     />
+    <button mat-button (click)="openCart()">
+      <mat-icon>shopping_cart</mat-icon>Cart
+    </button>
     <button mat-button (click)="login()" *ngIf="!isLoggedIn">
       <mat-icon>person</mat-icon>Login / Sign-up
     </button>

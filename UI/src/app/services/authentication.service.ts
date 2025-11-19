@@ -21,6 +21,8 @@ export interface Customer {
 })
 export class AuthenticationService {
     API_BASE_URL = 'http://localhost:8080/api';
+    isLoggedIn: boolean = false;
+    loggedInUserAsCustomer: Customer;
 
     constructor(
         private readonly httpClient: HttpClient
@@ -40,6 +42,22 @@ export class AuthenticationService {
 
     addCustomer(request) {
         return this.httpClient.post(`${this.API_BASE_URL}/add/customer`, request);
+    }
+
+    setLoggedInUserCustomer(customer) {
+        this.loggedInUserAsCustomer = customer;
+    }
+
+    getLoggedInUserCustomer() {
+        return this.loggedInUserAsCustomer;
+    }
+
+    setIsLoggedIn() {
+        this.isLoggedIn = true;
+    }
+
+    getIsLoggedIn() {
+        return this.isLoggedIn;
     }
 
 }

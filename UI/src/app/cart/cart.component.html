@@ -1,0 +1,29 @@
+<div style="width: 500px; height: fit-content; height: fit-content">
+  <span
+    style="display: flex; align-items: center; justify-content: space-between"
+  >
+    <h1 style="margin-left: 10px">Your Cart</h1>
+    <button
+      mat-button
+      mat-raised-button
+      style="margin-right: 10px"
+      (click)="close()"
+    >
+      Close
+    </button>
+  </span>
+  <ul *ngFor="let item of items">
+    <li>{{ item.quantity }}X {{ item.name }} - {{ item.size }}</li>
+  </ul>
+  <h3 *ngIf="items.length == 0" style="margin-left: 10px">No Items!</h3>
+  <button
+    mat-button
+    mat-raised-button
+    (click)="checkout()"
+    style="margin-left: 10px; margin-bottom: 10px"
+    *ngIf="items.length > 0"
+  >
+    Checkout
+  </button>
+  <br />
+</div>

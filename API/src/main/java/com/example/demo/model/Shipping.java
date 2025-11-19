@@ -28,9 +28,6 @@ public class Shipping {
     @Column(name = "zip_code")
     private String zipCode;
 
-    @Column(name = "zip_code_extension")
-    private String zipCodeExtension;
-
     @Column(name = "city")
     private String city;
 
@@ -38,5 +35,5 @@ public class Shipping {
     private String stateAbbr;
 
     @Column(name = "customer_sk")
-    private String customerId;
+    private Integer customerId;
 }

@@ -13,8 +13,8 @@ import lombok.Setter;
 public class Order {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    @Column(name = "order_sk")
-    private String orderId;
+    @Column(name = "tracking_number")
+    private Integer orderSk;
 
     @Column(name = "sku")
     private Integer sku;
@@ -27,4 +27,7 @@ public class Order {
 
     @Column(name = "customer_sk")
     private Integer customerId;
+
+    @Column(name = "order_number")
+    private String orderNumber;
 }

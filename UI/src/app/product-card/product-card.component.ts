@@ -12,13 +12,8 @@ export class ProductCardComponent {
   @Input() product!: Product;
 
   constructor(
-    private snack: MatSnackBar,
     private readonly router: Router
   ) { }
-
-  addToCart() {
-    this.snack.open(`${this.product.productName} added to cart`, 'Close', { duration: 2000 });
-  }
 
   handleProductClick() {
     this.router.navigate([`/product/${this.product.sku}`], { state: { product: this.product } });
