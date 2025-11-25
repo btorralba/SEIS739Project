@@ -30,37 +30,15 @@ Joe is on the fence for buying some merchandise. He recently saw an Instagram ad
 Bob is a huge fan of the business. He signed up for an account as soon as the site allowed it. He often visits the site and buys merchandise often. His main pain is not having any sort of way to track his order.
 
 ## 4. DB Schema Diagram
-
-<details>
-<summary>DB Diagram</summary>
 ![Schema Diagram](./docs/schemadiagram.png)
 
-</details>
-
 ## 5. Sequence Diagrams
-
-<details>
-    <summary>Joe's Flow - Viewing Product</summary>
 ![Joe's Flow](./docs/joesflowview.png)
 
-</details>
-
-<details>
-    <summary>Joe's Flow - Signup</summary>
 ![Joe's Flow](./docs/joesflowsignup.png)
-</details>
 
-<details>
-    <summary>Bob's Flow - Login</summary>
 ![Bob's Flow](./docs/bobsflowlogin.png)
-</details>
 
-<details>
-    <summary>Bob's Flow - Checkout</summary>
 ![Bob's Flow](./docs/bobsflowcheckout.png)
-</details>
 
-<details>
-<summary>Brandon's Flow - Inventory Management</summary>
 ![Bob's Flow](./docs/brandonsflowinventory.png)
-</details>
