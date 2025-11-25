@@ -1,0 +1,16 @@
+title Brandon's Flow - Inventory Management
+
+User -> UI: navigate to admin site,\nenter creds
+UI -> UI: validates creds
+UI -> Backend: getProducts()\ngetOrders()\ngetCustomers()
+Backend -> DB: select ....
+DB --> Backend: list of products, orders, and customers
+Backend --> UI: product objects\norder objects\ncustomer objects
+UI -> UI: sets datasource for table
+UI --> User: renders admin view
+User -> UI: edits a field
+UI -> Backend: updateOrder(orderInfo)\nupdateProduct(productInfo)
+Backend -> DB: update ...
+DB --> Backend: success
+Backend --> UI: success
+UI --> User: renders updated view

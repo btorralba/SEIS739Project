@@ -1,0 +1,15 @@
+title Joe's Flow - View Product
+
+User -> UI: load site
+UI -> Backend: getProducts()
+Backend -> DB: select products where ...
+DB --> Backend: list of products
+Backend --> UI: list of products, \nset in storage
+UI --> User: renders gallery of products
+User -> UI: click product
+UI -> UI: get product info\nfrom storage
+UI --> User: render clicked product
+User -> UI: click add to cart
+UI -> UI: sets cart in storage
+UI --> User: renders cart
+note over User: Checkout functionality is only\nfor logged in users. Joe is \nthen prompted to sign-up/login \nto proceed further.

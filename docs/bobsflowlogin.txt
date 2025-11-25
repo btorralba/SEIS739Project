@@ -1,0 +1,20 @@
+title Bob's Flow - Logging In
+
+User -> UI: load site
+UI -> Backend: getProducts()
+Backend -> DB: select products where ...
+DB --> Backend: list of products
+Backend --> UI: list of products, \nset in storage
+UI --> User: renders gallery of products
+
+User -> UI: click login, enter creds
+UI -> Backend: login(user, pass)
+Backend -> DB: select user where\nuser=username and\npass=password
+DB --> Backend: validated user object
+Backend --> UI: customer ID
+UI -> Backend: getCustomer(customerID)
+Backend -> DB: select from customer where\ncustomerID=customerID
+DB -> Backend: customer object
+Backend --> UI: customer object
+UI -> UI: sets customer info in storage
+UI --> User: renders Bob's view

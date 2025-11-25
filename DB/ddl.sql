@@ -31,14 +31,13 @@ create table if not exists seis739finalschema.shipping (
 	customer_sk BIGINT REFERENCES seis739finalschema.customer
 );
 
-
 create table if not exists seis739finalschema.order (
 	tracking_number SERIAL PRIMARY KEY,
-	sku BIGINT NOT NULL,
 	status VARCHAR(10) NOT NULL,
 	order_number VARCHAR(16) NOT NULL,
 	shipping_sk BIGINT REFERENCES seis739finalschema.shipping,
-	customer_sk BIGINT REFERENCES seis739finalschema.customer
+	customer_sk BIGINT REFERENCES seis739finalschema.customer,
+	sku BIGINT NOT NULL references seis739finalschema.product
 );
 
 create table if not exists seis739finalschema.user (

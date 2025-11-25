@@ -1,0 +1,18 @@
+title Joe's Flow - Signup
+
+User -> UI: click signup
+UI --> User: opens signup modal
+User -> UI: clicks submit
+UI -> Backend: addUser(userInfo)
+Backend -> DB: insert into user (userInfo)
+DB --> Backend: success
+Backend --> UI: success
+UI -> Backend: addCustomer(customerInfo)
+Backend -> DB: insert into customer (customerInfo)
+DB --> Backend: success
+Backend --> UI: success
+UI -> Backend: getCustomer(customerID)
+Backend -> DB: select customer where\ncustomerID=customerID
+DB --> Backend: customer object
+Backend --> UI: customer object
+UI --> User: renders Joe's view
