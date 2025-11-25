@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, ViewChild } from '@angular/core';
 import { MaterialModule } from "../material.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { variables } from '../environment/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Order, OrderService } from '../services/order.service';
 import { Product, ProductService } from '../services/product.service';
 import { Customer } from '../services/authentication.service';
@@ -23,16 +25,19 @@ export class AdminComponent {
   username: string;
   password: string;
   isValid: boolean = false;
-  products: Product[] = [];
-  orders: Order[] = [];
+  productsDataSource = new MatTableDataSource<Product>([]);
+  ordersDataSource = new MatTableDataSource<Order>([]);
   customers: Customer[] = [];
   productTableOpen = signal(true);
   orderTableOpen = signal(false);
   customerTableOpen = signal(false);
 
+  @ViewChild('productSort') productSort: MatSort;
+  @ViewChild('orderSort') orderSort: MatSort;
+
   productsDisplayedColumns = ["productName", "size", "color", "sku", "price", "quantity"];
   customerDisplayedColumns = ["firstName", "lastName", "emailAddress"];
-  orderDisplayedColumns = ["orderSk", "status", "orderNumber", "sku", "customerName", "shippingAddress"];
+  orderDisplayedColumns = ["orderSk", "orderNumber", "sku", "status", "customerName", "shippingAddress"];
 
   originalProductData: any = [];
   originalOrderData: any = [];
@@ -57,7 +62,15 @@ export class AdminComponent {
 
   setTables() {
     this.productService.getProducts().subscribe((data: Product[]) => {
-      this.products = data;
+      const sortedProducts = [...data].sort((a: Product, b: Product) => {
+        const skuA = typeof a.sku === 'string' ? parseInt(a.sku) : a.sku;
+        const skuB = typeof b.sku === 'string' ? parseInt(b.sku) : b.sku;
+        return skuA - skuB;
+      });
+      this.productsDataSource.data = sortedProducts;
+      if (this.productSort) {
+        this.productsDataSource.sort = this.productSort;
+      }
     });
 
     this.customerSerivce.getCustomers().subscribe((data: Customer[]) => {
@@ -77,7 +90,15 @@ export class AdminComponent {
         });
         orders.push(order);
       });
-      this.orders = orders;
+      const sortedOrders = [...orders].sort((a: Order, b: Order) => {
+        const orderSkA = typeof a.orderSk === 'string' ? parseInt(a.orderSk) : a.orderSk;
+        const orderSkB = typeof b.orderSk === 'string' ? parseInt(b.orderSk) : b.orderSk;
+        return orderSkA - orderSkB;
+      });
+      this.ordersDataSource.data = sortedOrders;
+      if (this.orderSort) {
+        this.ordersDataSource.sort = this.orderSort;
+      }
     });
   }
 
@@ -87,10 +108,10 @@ export class AdminComponent {
     this.productService.getProducts().subscribe((data: Product[]) => {
       this.originalProductData = [...data];
       for (let i = 0; i < this.originalProductData.length; i++) {
-        if (this.originalProductData[i].price != this.products[i].price ||
-          this.originalProductData[i].quantity != this.products[i].quantity
+        if (this.originalProductData[i].price != this.productsDataSource.data[i].price ||
+          this.originalProductData[i].quantity != this.productsDataSource.data[i].quantity
         ) {
-          this.productService.updateProduct(this.products[i]).subscribe((resp) => {
+          this.productService.updateProduct(this.productsDataSource.data[i]).subscribe((resp) => {
             isDataUpdate = true;
           });
         }
@@ -100,8 +121,8 @@ export class AdminComponent {
     this.orderService.getOrders().subscribe((data: Order[]) => {
       this.originalOrderData = [...data];
       for (let i = 0; i < this.originalOrderData.length; i++) {
-        if (this.originalOrderData[i].status != this.orders[i].status) {
-          this.orderService.updateOrder(this.orders[i]).subscribe((resp) => {
+        if (this.originalOrderData[i].status != this.ordersDataSource.data[i].status) {
+          this.orderService.updateOrder(this.ordersDataSource.data[i]).subscribe((resp) => {
             isDataUpdate = true;
 
           });

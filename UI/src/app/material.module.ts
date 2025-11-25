@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -36,7 +37,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSlideToggleModule,
     MatStepperModule,
     MatTableModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }
