@@ -30,9 +30,11 @@ Joe is on the fence for buying some merchandise. He recently saw an Instagram ad
 Bob is a huge fan of the business. He signed up for an account as soon as the site allowed it. He often visits the site and buys merchandise often. His main pain is not having any sort of way to track his order.
 
 ## 4. DB Schema Diagram
+
 ![Schema Diagram](./docs/schemadiagram.png)
 
 ## 5. Sequence Diagrams
+
 ![Joe's Flow](./docs/joesflowview.png)
 
 ![Joe's Flow](./docs/joesflowsignup.png)
@@ -42,3 +44,7 @@ Bob is a huge fan of the business. He signed up for an account as soon as the si
 ![Bob's Flow](./docs/bobsflowcheckout.png)
 
 ![Bob's Flow](./docs/brandonsflowinventory.png)
+
+## 6. Challenges Faced
+
+I did have to revise the DB/API a couple of times due to me figuring out more things that I needed afterwards. This would have been resolved in industry by having more than one developer and having an actual product team to figure out the requirements. Another problem was that I originally tried to "vibe code" some of the UI, but ran into issues with getting the app to actually run. I reverted back to a previous project of mine that used the same stack and went from there. In industry, I would have likely had a reference project I could have used as well.
