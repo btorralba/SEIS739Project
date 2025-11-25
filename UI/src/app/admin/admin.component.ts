@@ -27,6 +27,8 @@ export class AdminComponent {
   isValid: boolean = false;
   productsDataSource = new MatTableDataSource<Product>([]);
   ordersDataSource = new MatTableDataSource<Order>([]);
+  products: Product[] = [];
+  orders: Order[] = [];
   customers: Customer[] = [];
   productTableOpen = signal(true);
   orderTableOpen = signal(false);
@@ -37,7 +39,7 @@ export class AdminComponent {
 
   productsDisplayedColumns = ["productName", "size", "color", "sku", "price", "quantity"];
   customerDisplayedColumns = ["firstName", "lastName", "emailAddress"];
-  orderDisplayedColumns = ["orderSk", "orderNumber", "sku", "status", "customerName", "shippingAddress"];
+  orderDisplayedColumns = ["orderSk", "status", "orderNumber", "sku", "customerName", "shippingAddress"];
 
   originalProductData: any = [];
   originalOrderData: any = [];
@@ -68,6 +70,8 @@ export class AdminComponent {
         return skuA - skuB;
       });
       this.productsDataSource.data = sortedProducts;
+      // keep legacy array for tests and other code that uses it
+      this.products = sortedProducts;
       if (this.productSort) {
         this.productsDataSource.sort = this.productSort;
       }
@@ -96,6 +100,8 @@ export class AdminComponent {
         return orderSkA - orderSkB;
       });
       this.ordersDataSource.data = sortedOrders;
+      // keep legacy array for tests and other code that uses it
+      this.orders = sortedOrders;
       if (this.orderSort) {
         this.ordersDataSource.sort = this.orderSort;
       }
@@ -108,10 +114,10 @@ export class AdminComponent {
     this.productService.getProducts().subscribe((data: Product[]) => {
       this.originalProductData = [...data];
       for (let i = 0; i < this.originalProductData.length; i++) {
-        if (this.originalProductData[i].price != this.productsDataSource.data[i].price ||
-          this.originalProductData[i].quantity != this.productsDataSource.data[i].quantity
+        if (this.originalProductData[i].price != this.products[i].price ||
+          this.originalProductData[i].quantity != this.products[i].quantity
         ) {
-          this.productService.updateProduct(this.productsDataSource.data[i]).subscribe((resp) => {
+          this.productService.updateProduct(this.products[i]).subscribe((resp) => {
             isDataUpdate = true;
           });
         }
@@ -121,8 +127,8 @@ export class AdminComponent {
     this.orderService.getOrders().subscribe((data: Order[]) => {
       this.originalOrderData = [...data];
       for (let i = 0; i < this.originalOrderData.length; i++) {
-        if (this.originalOrderData[i].status != this.ordersDataSource.data[i].status) {
-          this.orderService.updateOrder(this.ordersDataSource.data[i]).subscribe((resp) => {
+        if (this.originalOrderData[i].status != this.orders[i].status) {
+          this.orderService.updateOrder(this.orders[i]).subscribe((resp) => {
             isDataUpdate = true;
 
           });
